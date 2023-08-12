@@ -231,12 +231,6 @@ The config files used:
 
 ## IX. TAWebApp
 
-```console
-http://20143albertoi:8080/login.aspx
-```
-
-![TA Infoy](img/info.jpg)
-
 The concept of TA is based on Blogging website, users can login and leave posts, while others can read and update to some extend. Later on, *Shopping Carts* are introduced, makes it a hybrid of both pull and push model. The search capability is emphasysed in the design, jQuery and AJAX are used as front-end enhancements to avoid screen flickering and unnecessary postbacks. Code and packages are self contained, which makes dockerizing possible. 
 
 TA per se is an *experimental concept*, while TA2 is more ambitious to the road of multi-containers. The configuration proccess is more complicated, but the use for production is still possible. 
