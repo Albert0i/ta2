@@ -7,11 +7,11 @@ This article briefly describes the moving of an [ASP.NET Web Forms](https://en.w
 
 The first step towards windows containers is to install [Docker Desktop on Windows](https://docs.docker.com/desktop/windows/install/), which requires [Hyper-V](https://docs.microsoft.com/en-us/virtualization/hyper-v-on-windows/about/) feature enabled. Since Hyper-V is [Hypervisor Type 1](https://www.hitechnectar.com/blogs/hypervisor-type-1-vs-type-2/), by installing Hyper-V also means that you can not run other virtualization softwares such as VMWare and VirtualBox (Hypervisor Type 2). 
 
-![Hyper-V features](img\Hyper-V.jpg)
+![Hyper-V features](img/Hyper-V.jpg)
 
 Once installed you can switch between running Linux or Windows containers, when are done with these container things... 
 
-![Docker Desktop on Windows](img\DockerDesktop.jpg)
+![Docker Desktop on Windows](img/DockerDesktop.jpg)
 
 Note: Starting Version 6.1.4, [VirtualBox](https://www.virtualbox.org/wiki/Changelog) restores the ability to run VMs through Hyper-V, at the expense of performance. That means it uses *simulation* to execute virtual machine. 
 
@@ -24,17 +24,17 @@ Basically, .NET Framework and .NET Core are completely different development mod
 `Dockerizing .NET Webform application is difficult but possible`, and that's what i am doing now.
 If you are not using the latest version of Framework, the first step would be upgrading your project. In Solution Explorer, right-click on you project and choose 'Properties', 'Target framework': 
 
-![Target framework](img\Target_framework.jpg)
+![Target framework](img/Target_framework.jpg)
 
 choose  by '.NET Framework 4.8', save, rebuild and test the project. 
 
 In Solution Explorer, right-click on your project and choose 'Manage NuGet Package...', 'Browse'. We are going to store session out-proc in [Redis](https://redis.io/) Cache. You need the “Microsoft.Web.RedisSessionStateProvider” package: 
 
-![SessionStateProvider](img\SessionStateProvider.jpg)
+![SessionStateProvider](img/SessionStateProvider.jpg)
 
 You may also install need "ServiceStack.Redis" package if you need other Redis features. Save, edit web.config as follow, rebuild and test the project. 
 
-![MySessionStateStore](img\MySessionStateStore.jpg)
+![MySessionStateStore](img/MySessionStateStore.jpg)
 
 Note: `20143ALBERTOI` is the target machine hosting Redis Server. 
 
@@ -131,7 +131,7 @@ Dockerfile*
 ```
 Note: Use **'mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019 AS runtime'** as runtime significantly reduce image size. 
 
-![mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019](img\4.8-windowsservercore-ltsc2019.jpg)
+![mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019](img/4.8-windowsservercore-ltsc2019.jpg)
 
 Following is code fragment from docker-compose.yml: 
 
@@ -156,9 +156,9 @@ Following is code fragment from docker-compose.yml:
 
 To further facilitate our day-to-day life of maintaining the containers, we need a [Makefile](https://www.gnu.org/software/make/manual/make.html) to put commands together. 
 
-![make up](img\ta2-make-up.jpg)
+![make up](img/ta2-make-up.jpg)
 
-![make down](img\ta2-make-down.jpg)
+![make down](img/ta2-make-down.jpg)
 
 `PS: Dockerfile, docker-compose.yml and Makefile 合稱 “Docker 三竇”`
 
@@ -170,9 +170,9 @@ So far so good, our containers are up and running...
 http://20143albertoi:8080/admin.aspx
 ```
 
-![Machine Key](img\machineKey.jpg)
+![Machine Key](img/machineKey.jpg)
 
-![Oops...](img\Oops.jpg)
+![Oops...](img/Oops.jpg)
 
 Follow the link to find out who the murderer is...
 
@@ -194,11 +194,11 @@ Follow the link to find out who the murderer is...
 
 So, first things first is to create a [Machine Key](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831711(v=ws.11)?redirectedfrom=MSDN)... but how??? You can run the given Powershell script on the page, but the simplest i figure out is on the IIS.. 
 
-![IIS Machine Key](img\IIS-1.jpg)
+![IIS Machine Key](img/IIS-1.jpg)
 
-![IIS Generate Key](img\IIS-2.jpg)
+![IIS Generate Key](img/IIS-2.jpg)
 
-![Oops...](img\IIS-3.jpg)
+![Oops...](img/IIS-3.jpg)
 
 - decryption: Used to encrypt and decrypt Forms authentication tickets and view state.
 - decryptionKey: Used to encrypt and decrypt Forms authentication tickets and view state.
@@ -235,7 +235,7 @@ The config files used:
 http://20143albertoi:8080/login.aspx
 ```
 
-![TA Infoy](img\info.jpg)
+![TA Infoy](img/info.jpg)
 
 The concept of TA is based on Blogging website, users can login and leave posts, while others can read and update to some extend. Later on, *Shopping Carts* are introduced, makes it a hybrid of both pull and push model. The search capability is emphasysed in the design, jQuery and AJAX are used as front-end enhancements to avoid screen flickering and unnecessary postbacks. Code and packages are self contained, which makes dockerizing possible. 
 
